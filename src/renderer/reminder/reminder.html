@@ -11,8 +11,17 @@
       <div id="cats"></div>
       <h1 id="title">该喝水啦</h1>
       <p  id="message">起来活动一下,喝口水。</p>
-      <button id="dismiss">好,这就去 →</button>
-      <div id="hint">按 Esc 或点击空白处关闭</div>
+
+      <div id="countdownWrap">
+        <svg id="ring" viewBox="0 0 120 120">
+          <circle class="ring-bg"    cx="60" cy="60" r="52"/>
+          <circle class="ring-fill"  cx="60" cy="60" r="52"/>
+        </svg>
+        <div id="countdownText">2:00</div>
+      </div>
+
+      <button id="dismiss">提前结束 →</button>
+      <div id="hint">倒计时结束自动收起 · Esc / 点空白处可立即关闭</div>
     </div>
     <script src="reminder.js"></script>
   </body>

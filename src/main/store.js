@@ -8,6 +8,7 @@ const DEFAULTS = {
   activeCatIds: ['momo'],
   reminderEnabled: true,
   reminderIntervalMin: 45,
+  reminderDurationSec: 120,
   reminderTitle: '该喝水啦',
   reminderMessage: '起来活动一下,喝口水,看看远处的窗外。',
   catScale: 1.0,

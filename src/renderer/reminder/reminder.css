@@ -66,8 +66,54 @@ p {
   color: #d8dde4;
 }
 
+/* Countdown ring */
+#countdownWrap {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#ring {
+  width: 132px;
+  height: 132px;
+  transform: rotate(-90deg);
+}
+
+#ring .ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 8;
+}
+
+#ring .ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke: #ffd6a3;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 326.726;   /* 2π·52 */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.95s linear;
+  filter: drop-shadow(0 0 8px rgba(255,214,163,0.55));
+}
+
+#countdownText {
+  position: absolute;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff7e3;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+#countdownText.urgent { color: #ff9f7a; }
+
 button {
-  margin-top: 12px;
+  margin-top: 4px;
   padding: 14px 36px;
   font-size: 18px;
   font-weight: 600;
