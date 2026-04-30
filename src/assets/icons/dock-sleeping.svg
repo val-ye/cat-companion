@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#3b4252"/>
+      <stop offset="100%" stop-color="#1c1f24"/>
+    </radialGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffaf2"/>
+      <stop offset="100%" stop-color="#e8d8be"/>
+    </linearGradient>
+    <linearGradient id="patch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5b3a26"/>
+      <stop offset="100%" stop-color="#3d2618"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="100" fill="url(#bg)"/>
+  <!-- Cushion -->
+  <ellipse cx="256" cy="400" rx="200" ry="40" fill="#2a2d33"/>
+  <ellipse cx="256" cy="395" rx="180" ry="30" fill="#3a3e46"/>
+  <!-- Curled sleeping cat -->
+  <path d="M120 360 Q120 220 256 210 Q392 220 392 360 Q392 400 256 400 Q120 400 120 360 Z"
+        fill="url(#fur)" stroke="#cdb190" stroke-width="3"/>
+  <!-- Patches on back -->
+  <path d="M210 230 Q170 250 200 290 Q260 280 250 230 Z" fill="url(#patch)" opacity="0.85"/>
+  <path d="M310 232 Q350 252 322 292 Q262 282 272 232 Z" fill="url(#patch)" opacity="0.8"/>
+  <!-- Tail wrapped -->
+  <path d="M118 360 Q60 340 80 280 Q108 256 130 280 Q108 320 138 358 Z"
+        fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+  <!-- Tucked head -->
+  <ellipse cx="170" cy="340" rx="70" ry="56" fill="url(#fur)" stroke="#cdb190" stroke-width="3"/>
+  <path d="M138 312 L128 270 L172 304 Z" fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+  <path d="M144 308 L138 282 L168 304 Z" fill="#f5b9b9"/>
+  <!-- Closed eye -->
+  <path d="M150 340 q12 8 22 0" stroke="#3d2618" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Pink nose -->
+  <circle cx="118" cy="350" r="6" fill="#f49bb0"/>
+  <!-- Z's -->
+  <text x="380" y="180" font-family="ui-sans-serif, system-ui" font-size="56" font-weight="700" fill="#a3aeb8">Z</text>
+  <text x="430" y="140" font-family="ui-sans-serif, system-ui" font-size="40" font-weight="700" fill="#a3aeb8">z</text>
+  <text x="465" y="110" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="700" fill="#a3aeb8">z</text>
+</svg>

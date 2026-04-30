@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cat Companion 设置</title>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Cat Companion</h1>
+      <p class="sub">让馍馍和 Java 住进你的 Dock</p>
+    </header>
+
+    <section>
+      <h2>选择活跃的猫</h2>
+      <p class="hint">勾选哪只就出现哪只,可以同时多只。</p>
+      <div id="catList" class="cat-list"></div>
+    </section>
+
+    <section>
+      <h2>定时提醒</h2>
+      <label class="toggle">
+        <input type="checkbox" id="reminderEnabled" />
+        <span>启用提醒</span>
+      </label>
+
+      <label>
+        <span>提醒间隔(分钟)</span>
+        <input type="number" id="interval" min="1" max="600" />
+      </label>
+
+      <label>
+        <span>提醒标题</span>
+        <input type="text" id="title" maxlength="40" />
+      </label>
+
+      <label>
+        <span>提醒内容</span>
+        <textarea id="message" rows="3" maxlength="200"></textarea>
+      </label>
+
+      <button id="testReminder" class="ghost">现在试一次</button>
+    </section>
+
+    <section>
+      <h2>外观</h2>
+      <label>
+        <span>猫咪大小</span>
+        <input type="range" id="scale" min="0.6" max="1.6" step="0.1" />
+        <span id="scaleValue" class="value"></span>
+      </label>
+    </section>
+
+    <footer>
+      <span id="status" class="status"></span>
+      <button id="save">保存</button>
+    </footer>
+
+    <script src="settings.js"></script>
+  </body>
+</html>

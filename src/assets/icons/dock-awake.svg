@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#5b6376"/>
+      <stop offset="100%" stop-color="#262a33"/>
+    </radialGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffaf2"/>
+      <stop offset="100%" stop-color="#e8d8be"/>
+    </linearGradient>
+    <linearGradient id="patch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5b3a26"/>
+      <stop offset="100%" stop-color="#3d2618"/>
+    </linearGradient>
+    <radialGradient id="eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#bfe3ff"/>
+      <stop offset="60%" stop-color="#5fa8d8"/>
+      <stop offset="100%" stop-color="#1d4f7a"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="100" fill="url(#bg)"/>
+  <!-- Awake sitting cat, looking at us -->
+  <!-- Tail -->
+  <path d="M380 380 Q470 340 450 240 Q420 200 400 240 Q420 320 360 380 Z"
+        fill="url(#fur)" stroke="#cdb190" stroke-width="3"/>
+  <!-- Body -->
+  <ellipse cx="256" cy="360" rx="130" ry="80" fill="url(#fur)" stroke="#cdb190" stroke-width="3"/>
+  <!-- Back patches -->
+  <path d="M170 320 Q150 350 190 380 Q230 360 220 320 Z" fill="url(#patch)" opacity="0.9"/>
+  <path d="M320 322 Q352 350 318 384 Q282 364 290 322 Z" fill="url(#patch)" opacity="0.85"/>
+  <!-- Head -->
+  <ellipse cx="256" cy="220" rx="120" ry="105" fill="url(#fur)" stroke="#cdb190" stroke-width="3"/>
+  <!-- Patch over right cheek -->
+  <path d="M180 200 Q150 240 178 280 Q210 296 230 270 Q230 230 210 200 Z" fill="url(#patch)" opacity="0.9"/>
+  <!-- Ears -->
+  <path d="M168 150 L150 60 L226 130 Z" fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+  <path d="M176 144 L162 96 L210 132 Z" fill="#f5b9b9"/>
+  <path d="M344 150 L362 60 L286 130 Z" fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+  <path d="M336 144 L350 96 L302 132 Z" fill="#f5b9b9"/>
+  <!-- Eyes -->
+  <ellipse cx="220" cy="220" rx="22" ry="26" fill="url(#eye)"/>
+  <ellipse cx="292" cy="220" rx="22" ry="26" fill="url(#eye)"/>
+  <circle cx="220" cy="224" r="6" fill="#0a1d2e"/>
+  <circle cx="292" cy="224" r="6" fill="#0a1d2e"/>
+  <circle cx="226" cy="214" r="4" fill="#fff"/>
+  <circle cx="298" cy="214" r="4" fill="#fff"/>
+  <!-- Pink nose -->
+  <path d="M244 260 L268 260 L256 278 Z" fill="#f49bb0"/>
+  <!-- Mouth -->
+  <path d="M256 278 Q256 296 240 300" stroke="#7a5a48" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M256 278 Q256 296 272 300" stroke="#7a5a48" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Big paws -->
+  <ellipse cx="200" cy="430" rx="40" ry="22" fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+  <ellipse cx="312" cy="430" rx="40" ry="22" fill="url(#fur)" stroke="#cdb190" stroke-width="2"/>
+</svg>

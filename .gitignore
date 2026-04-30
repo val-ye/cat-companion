@@ -1,0 +1,8 @@
+node_modules/
+dist/
+out/
+*.log
+.DS_Store
+
+# Generated icon PNGs (built from SVG via npm run build:icons)
+src/assets/icons/*.png
