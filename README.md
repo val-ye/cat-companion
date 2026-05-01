@@ -1,4 +1,4 @@
-# Cat Companion
+# Purrtners
 
 A small macOS desktop pet app. Cats live in the Dock, wander around the desktop, nap for long stretches, and occasionally remind you to drink water or take a break.
 
@@ -30,8 +30,8 @@ Requirements:
 - Node.js 18+
 
 ```bash
-git clone <your-repo-url> cat-companion
-cd cat-companion
+git clone <your-repo-url> purrtners
+cd purrtners
 npm install
 npm start
 ```
@@ -48,15 +48,15 @@ npm run dist:mac:local
 
 Outputs are written to `dist/`:
 
-- `Cat Companion-<version>-arm64.dmg`
-- `Cat Companion-<version>.dmg`
+- `Purrtners-<version>-arm64.dmg`
+- `Purrtners-<version>.dmg`
 - matching `.zip` files
 
 The app is not signed/notarized. On another Mac, if Gatekeeper blocks it:
 
 ```bash
-xattr -dr com.apple.quarantine "/Applications/Cat Companion.app"
-open "/Applications/Cat Companion.app"
+xattr -dr com.apple.quarantine "/Applications/Purrtners.app"
+open "/Applications/Purrtners.app"
 ```
 
 More release notes: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
@@ -76,7 +76,7 @@ More release notes: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
 Settings are stored at:
 
 ```text
-~/Library/Application Support/cat-companion/cat-companion-settings.json
+~/Library/Application Support/purrtners/purrtners-settings.json
 ```
 
 Settings include active cats, reminder interval, reminder duration, nickname, reminder text, and cat scale.

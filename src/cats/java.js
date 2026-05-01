@@ -29,7 +29,7 @@ module.exports = {
     walk: pose('java_walk.png', 'walk'),
     sleep: pose('java_sleep.png', 'sleep'),
     alert: pose('java_alert.png', 'alert'),
-    bellyUp: pose('java_bellyUp.png', 'belly up'),
+    bellyUp: pose('java_idle_lie.png', 'belly up'),
     sitLegUp: pose('java_sitLegUp.png', 'sit leg up'),
     groom: pose('java_groom.png', 'groom'),
   },

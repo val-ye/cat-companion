@@ -25,7 +25,7 @@ module.exports = {
   accentColor: '#68aeda',
   defaultSize: { width: 230, height: 190 },
   poses: {
-    idle: pose('momo_idle.png', 'idle'),
+    idle: pose('momo_sit.png', 'idle'),
     walk: pose('momo_walk.png', 'walk'),
     sleep: pose('momo_sleep.png', 'sleep'),
     alert: pose('momo_alert.png', 'alert'),

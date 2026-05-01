@@ -1,6 +1,6 @@
 # Cat Asset Guide
 
-Cat Companion uses PNG images for each pose. The renderer wraps each image in a transparent Electron window and applies CSS animation.
+Purrtners uses PNG images for each pose. The renderer wraps each image in a transparent Electron window and applies CSS animation.
 
 ## Where Assets Live
 

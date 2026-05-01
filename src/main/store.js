@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { app } = require('electron');
 
-const FILE = path.join(app.getPath('userData'), 'cat-companion-settings.json');
+const FILE = path.join(app.getPath('userData'), 'purrtners-settings.json');
 
 const DEFAULTS = {
   activeCatIds: ['momo'],

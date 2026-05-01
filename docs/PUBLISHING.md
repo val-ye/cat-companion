@@ -14,19 +14,19 @@ Artifacts are written to `dist/`.
 For Apple Silicon Macs, share:
 
 ```text
-dist/Cat Companion-0.1.0-arm64.dmg
+dist/Purrtners-0.2.0-arm64.dmg
 ```
 
 For Intel Macs, share:
 
 ```text
-dist/Cat Companion-0.1.0.dmg
+dist/Purrtners-0.2.0.dmg
 ```
 
 ## GitHub Release Flow
 
 1. Push the repo to GitHub.
-2. Create a release, for example `v0.1.0`.
+2. Create a release, for example `v0.2.0`.
 3. Upload the `.dmg` files from `dist/` as release assets.
 4. Share the release URL.
 
@@ -35,18 +35,18 @@ dist/Cat Companion-0.1.0.dmg
 After uploading a DMG somewhere public, users can install with:
 
 ```bash
-curl -L "YOUR_DMG_URL" -o /tmp/cat-companion.dmg && \
-hdiutil attach /tmp/cat-companion.dmg && \
-cp -R "/Volumes/Cat Companion/Cat Companion.app" /Applications/ && \
-hdiutil detach "/Volumes/Cat Companion" && \
-open "/Applications/Cat Companion.app"
+curl -L "YOUR_DMG_URL" -o /tmp/purrtners.dmg && \
+MOUNT="$(hdiutil attach /tmp/purrtners.dmg | awk '/\/Volumes\//{print substr($0,index($0,"/Volumes/"))}' | tail -1)" && \
+cp -R "$MOUNT/Purrtners.app" /Applications/ && \
+hdiutil detach "$MOUNT" && \
+open "/Applications/Purrtners.app"
 ```
 
 If macOS blocks the unsigned app:
 
 ```bash
-xattr -dr com.apple.quarantine "/Applications/Cat Companion.app"
-open "/Applications/Cat Companion.app"
+xattr -dr com.apple.quarantine "/Applications/Purrtners.app"
+open "/Applications/Purrtners.app"
 ```
 
 ## Source Install
@@ -54,8 +54,8 @@ open "/Applications/Cat Companion.app"
 For users comfortable with Node:
 
 ```bash
-git clone <repo-url> cat-companion
-cd cat-companion
+git clone <repo-url> purrtners
+cd purrtners
 npm install
 npm start
 ```
