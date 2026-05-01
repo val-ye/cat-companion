@@ -9,8 +9,9 @@ const DEFAULTS = {
   reminderEnabled: true,
   reminderIntervalMin: 45,
   reminderDurationSec: 120,
+  userNickname: '',
   reminderTitle: '该喝水啦',
-  reminderMessage: '起来活动一下,喝口水,看看远处的窗外。',
+  reminderMessage: '{name}，起来活动一下，喝口水，看看远处的窗外。',
   catScale: 1.0,
   walkEnabled: true,
 };

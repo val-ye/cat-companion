@@ -49,7 +49,12 @@ html, body {
   animation-delay: 0.2s;
 }
 
-#cats svg { width: 100%; height: 100%; }
+#cats svg,
+#cats img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 h1 {
   font-size: clamp(36px, 6vw, 72px);

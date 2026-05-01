@@ -35,24 +35,32 @@ html, body {
   pointer-events: none;
 }
 
+.cat img.pet-pose {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: 50% 88%;
+  will-change: transform, filter;
+}
+
 /* Idle: gentle breathing */
-.cat[data-pose="idle"] {
-  animation: breathe 3.4s ease-in-out infinite;
+.cat[data-pose="idle"] img.pet-pose {
+  animation: breathe 2.6s ease-in-out infinite;
 }
 
 /* Walking: bobbing + slight rotation */
-.cat[data-pose="walk"] {
-  animation: walkBob 0.5s ease-in-out infinite;
+.cat[data-pose="walk"] img.pet-pose {
+  animation: walkStep 0.42s ease-in-out infinite;
 }
 
 /* Facing left (default SVG faces right-ish) */
 .cat[data-flip="true"] {
   transform: scaleX(-1);
 }
-.cat[data-pose="walk"][data-flip="true"] {
-  animation: walkBobFlip 0.5s ease-in-out infinite;
-}
-
 /* Being dragged: slight squish */
 .cat.dragging {
   animation: squish 0.6s ease-in-out infinite;
@@ -60,23 +68,58 @@ html, body {
 }
 
 /* Sleep: slow rise/fall */
-.cat[data-pose="sleep"] {
-  animation: snore 4s ease-in-out infinite;
+.cat[data-pose="sleep"] img.pet-pose {
+  animation: sleepBreath 3.2s ease-in-out infinite;
+}
+
+.cat[data-pose="stretch"] img.pet-pose {
+  transform-origin: 25% 92%;
+  animation: stretchLong 1.8s ease-in-out infinite;
+}
+
+.cat[data-pose="sideLie"],
+.cat[data-pose="bellyUp"] {
+  transform-origin: 50% 82%;
+}
+
+.cat[data-pose="sideLie"] img.pet-pose {
+  animation: sideLieBreathe 2.7s ease-in-out infinite;
+}
+
+.cat[data-pose="bellyUp"] img.pet-pose {
+  animation: bellyUpWiggle 2.4s ease-in-out infinite;
+}
+
+.cat[data-pose="roll"] img.pet-pose {
+  transform-origin: 54% 58%;
+  animation: rollWiggle 1.55s ease-in-out infinite;
+}
+
+.cat[data-pose="reachUp"] img.pet-pose {
+  transform-origin: 50% 96%;
+  animation: pawReach 1.1s ease-in-out infinite;
+}
+
+.cat[data-pose="sitLegUp"] img.pet-pose {
+  transform-origin: 52% 86%;
+  animation: legUpSway 1.35s ease-in-out infinite;
+}
+
+.cat[data-pose="groom"] img.pet-pose {
+  transform-origin: 54% 82%;
+  animation: groomBob 0.9s ease-in-out infinite;
 }
 
 @keyframes breathe {
-  0%, 100% { transform: scale(1, 1); }
-  50%      { transform: scale(1.02, 0.98); }
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50%      { transform: translateY(1px) scale(1.035, 0.975); }
 }
 
-@keyframes walkBob {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%      { transform: translateY(-3px) rotate(1deg); }
-}
-
-@keyframes walkBobFlip {
-  0%, 100% { transform: scaleX(-1) translateY(0) rotate(1deg); }
-  50%      { transform: scaleX(-1) translateY(-3px) rotate(-1deg); }
+@keyframes walkStep {
+  0%, 100% { transform: translateY(0) translateX(-1px) rotate(-2deg) scale(1.01, 0.99); }
+  25%      { transform: translateY(-6px) translateX(1px) rotate(2deg) scale(0.99, 1.015); }
+  50%      { transform: translateY(0) translateX(2px) rotate(1deg) scale(1.02, 0.985); }
+  75%      { transform: translateY(-4px) translateX(0) rotate(-1.5deg) scale(0.995, 1.01); }
 }
 
 @keyframes squish {
@@ -84,7 +127,46 @@ html, body {
   50%      { transform: scale(0.95, 1.05); }
 }
 
-@keyframes snore {
-  0%, 100% { transform: scale(1, 1); }
-  50%      { transform: scale(1.015, 0.985); }
+@keyframes sleepBreath {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  50%      { transform: translateY(2px) rotate(-0.8deg) scale(1.04, 0.97); }
+}
+
+@keyframes stretchLong {
+  0%, 100% { transform: translateX(0) scale(1.02, 0.98) rotate(0deg); }
+  45%      { transform: translateX(-7px) scale(1.12, 0.9) rotate(-1.5deg); }
+  70%      { transform: translateX(-4px) scale(1.06, 0.94) rotate(0.8deg); }
+}
+
+@keyframes sideLieBreathe {
+  0%, 100% { transform: translateY(0) rotate(-0.5deg) scale(1, 1); }
+  50%      { transform: translateY(2px) rotate(0.8deg) scale(1.035, 0.975); }
+}
+
+@keyframes bellyUpWiggle {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg) scale(1, 1); }
+  30%      { transform: translateY(-3px) rotate(1.8deg) scale(1.025, 0.98); }
+  65%      { transform: translateY(1px) rotate(-2.2deg) scale(0.99, 1.015); }
+}
+
+@keyframes rollWiggle {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(-5deg) scale(1); }
+  35%      { transform: translateY(-6px) translateX(6px) rotate(7deg) scale(1.03); }
+  70%      { transform: translateY(-2px) translateX(-3px) rotate(-9deg) scale(0.99); }
+}
+
+@keyframes pawReach {
+  0%, 100% { transform: translateY(0) scale(1, 1) rotate(0deg); }
+  45%      { transform: translateY(-10px) scale(0.96, 1.08) rotate(-1deg); }
+  70%      { transform: translateY(-6px) scale(0.98, 1.04) rotate(1deg); }
+}
+
+@keyframes legUpSway {
+  0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+  50%      { transform: translateY(-3px) rotate(2.5deg) scale(1.015); }
+}
+
+@keyframes groomBob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-4px) rotate(3deg) scale(1.015); }
 }

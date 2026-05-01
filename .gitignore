@@ -4,5 +4,8 @@ out/
 *.log
 .DS_Store
 
-# Generated icon PNGs (built from SVG via npm run build:icons)
-src/assets/icons/*.png
+# Local art workspace: useful while designing, too large/noisy for public repo.
+art/
+
+# Generated macOS iconset directory. Keep final PNG/ICNS outputs in src/assets/icons.
+src/assets/icons/app.iconset/

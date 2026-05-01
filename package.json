@@ -1,18 +1,18 @@
 {
   "name": "cat-companion",
   "version": "0.1.0",
-  "description": "A macOS desktop companion that lets Momo (ragdoll) and Java (Russian blue) live in your dock, wander your desktop, and remind you to take breaks.",
+  "description": "A macOS desktop cat companion with photo-based pet poses, Dock presence, wandering behavior, and break reminders.",
   "main": "src/main/main.js",
   "author": "haoshuo",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
-    "dev": "electron . --enable-logging",
-    "build:icons": "electron scripts/build-icons.js",
-    "postinstall": "electron scripts/build-icons.js || true",
+    "start": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "dev": "env -u ELECTRON_RUN_AS_NODE electron . --enable-logging",
+    "build:icons": "python3 scripts/make-photo-icon.py",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "dist:mac": "electron-builder --mac"
+    "dist:mac": "electron-builder --mac",
+    "dist:mac:local": "electron-builder --mac --publish never"
   },
   "build": {
     "appId": "com.haoshuo.catcompanion",
@@ -20,6 +20,7 @@
     "asar": true,
     "files": [
       "src/**/*",
+      "LICENSE",
       "package.json"
     ],
     "mac": {

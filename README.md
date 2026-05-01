@@ -1,63 +1,125 @@
-# Cat Companion 🐈
+# Cat Companion
 
-让 **馍馍**(布偶)和 **Java**(俄罗斯蓝)住进你的 macOS Dock。
+A small macOS desktop pet app. Cats live in the Dock, wander around the desktop, nap for long stretches, and occasionally remind you to drink water or take a break.
 
-## 功能
+The current build is photo-based: each pose is a PNG asset extracted from real cat photos, with CSS "puppet" animation layered on top.
 
-- 🪟 **桌面漫游**:小猫从 Dock 跳出,在屏幕底部随机走动、坐下、打盹。
-- 🖱️ **可拖拽**:鼠标按住即可把它拎到任意位置,松手后继续自己玩。
-- 🛌 **Dock 即猫窝**:没在桌面活跃的时候,Dock 图标变成蜷成一团睡觉的小猫。
-- ⏰ **定时提醒 + 倒计时**:每隔自定义间隔(默认 45 分钟),猫的形象会放大铺满屏幕,
-  显示自定义文字提醒你喝水/活动。屏幕中央有一圈倒计时(默认 2 分钟),走完会
-  自动收起,不锁屏不抢鼠标 —— 你想立刻关掉就按 `Esc` 或点空白处。
-- 🐾 **多猫共存**:可以一只,也可以两只同时在桌面。
-- 🆕 **可扩展**:加新猫只需加一个 JS 文件,见 [`docs/ADDING_CATS.md`](docs/ADDING_CATS.md)。
+## Features
 
-## 角色
+- Desktop cats: drag them around, let them wander, or close a cat back to the Dock.
+- Multi-cat mode: enable one cat or several cats at the same time.
+- Dock presence: the app icon uses a curled sleeping cat image.
+- Photo-based poses: idle, walk, sleep, stretch, roll, belly-up, grooming, and alert poses.
+- Long naps: sleep can last 3 hours, rotating sleep poses hourly.
+- Break reminder: fullscreen non-locking reminder with a countdown.
+- Custom reminder copy: supports a nickname and `{name}` template variable.
+- Extensible cats: add a JS cat definition and PNG pose assets.
 
-| ID | 名字 | 品种 | 体重 | 特征 |
-|---|---|---|---|---|
-| `momo` | 馍馍 | 布偶 (Ragdoll) | ~8.4 斤 | 蓝眼睛、粉鼻子、大爪子,背上翅膀状色块,尾巴有浅棕条纹 |
-| `java` | Java | 俄罗斯蓝 (Russian Blue) | ~13.5 lb | 黑鼻子、圆眼睛、小爪子,腰宽呈三角形 |
+## Included Cats
 
-## 运行
+| ID | Name | Notes |
+| --- | --- | --- |
+| `momo` | 馍馍 / Momo | Ragdoll, blue eyes, pink nose, fluffy long body, big paws |
+| `java` | Java | Blue-gray short hair, small head, wide body, black nose, round eyes |
 
-只需要 Node.js (≥ 18) 和 Electron。
+## Quick Start
+
+Requirements:
+
+- macOS
+- Node.js 18+
 
 ```bash
+git clone <your-repo-url> cat-companion
 cd cat-companion
-npm install            # 同时会自动把 SVG 图标渲染成 PNG
-npm start              # 启动应用
+npm install
+npm start
 ```
 
-第一次启动后,Dock 里会出现猫咪图标。右键 / 长按 Dock 图标可以快速切换活跃的猫,
-或者打开「设置…」修改提醒文字、间隔、缩放等。
+`npm start` intentionally clears `ELECTRON_RUN_AS_NODE` because some local shells set it and make Electron behave like plain Node.
 
-## 打包成 .app
+## Build a macOS App
+
+For local/private distribution:
 
 ```bash
-npm run dist:mac       # 生成 .dmg + .zip,产物在 dist/ 下
+npm run dist:mac:local
 ```
 
-如果你只想本地试用而不签名/分发,`npm start` 已经足够。
+Outputs are written to `dist/`:
 
-## 操作速查
+- `Cat Companion-<version>-arm64.dmg`
+- `Cat Companion-<version>.dmg`
+- matching `.zip` files
 
-| 操作 | 行为 |
-|---|---|
-| 拖拽小猫 | 任意移动位置 |
-| 双击小猫 | 立即触发一次提醒 |
-| ⌘/Ctrl 点击小猫 | 让它回 Dock 睡觉 |
-| 右键 Dock 图标 | 快速切换活跃的猫 / 打开设置 / 立即提醒 |
-| Esc(提醒页面) | 关闭提醒 |
+The app is not signed/notarized. On another Mac, if Gatekeeper blocks it:
 
-## 设置文件位置
+```bash
+xattr -dr com.apple.quarantine "/Applications/Cat Companion.app"
+open "/Applications/Cat Companion.app"
+```
 
-`~/Library/Application Support/cat-companion/cat-companion-settings.json`
+More release notes: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
 
-直接编辑也可以,改完重启 app 生效。
+## Controls
 
-## 加新猫
+| Action | Behavior |
+| --- | --- |
+| Drag a cat | Move it anywhere on screen |
+| Double-click a cat | Trigger reminder now |
+| Cmd/Ctrl-click a cat | Close that cat window |
+| Dock right-click | Toggle cats, open settings, trigger reminder |
+| Esc in reminder | Dismiss reminder |
 
-见 [`docs/ADDING_CATS.md`](docs/ADDING_CATS.md)。简而言之,每只猫就是一个
-导出 `id / name / poses` 的 JS 模块,加进 `src/cats/index.js` 注册一行就能用。
+## Settings
+
+Settings are stored at:
+
+```text
+~/Library/Application Support/cat-companion/cat-companion-settings.json
+```
+
+Settings include active cats, reminder interval, reminder duration, nickname, reminder text, and cat scale.
+
+## Replacing Cat Photos
+
+Final app assets live in:
+
+```text
+src/assets/cats/momo
+src/assets/cats/java
+```
+
+Use transparent PNGs when possible. Longest side around `800-1200px` works well. Keep the same filename to replace a pose, then restart the app.
+
+See [`docs/ASSETS.md`](docs/ASSETS.md) for the pose filenames and asset guidelines.
+
+## Adding New Cats
+
+See [`docs/ADDING_CATS.md`](docs/ADDING_CATS.md).
+
+Short version:
+
+1. Add PNG pose assets under `src/assets/cats/<cat-id>/`.
+2. Add `src/cats/<cat-id>.js`.
+3. Register it in `src/cats/index.js`.
+
+## Public Repo Notes
+
+Do commit:
+
+- `src/`
+- `docs/`
+- `scripts/`
+- `package.json`
+- `package-lock.json`
+- `README.md`
+- `LICENSE`
+
+Do not commit:
+
+- `node_modules/`
+- `dist/`
+- `art/generated/`
+- `art/references/`
+- local source photos or temporary extraction files
