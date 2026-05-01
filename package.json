@@ -1,6 +1,6 @@
 {
-  "name": "cat-companion",
-  "version": "0.1.0",
+  "name": "purrtners",
+  "version": "0.2.0",
   "description": "A macOS desktop cat companion with photo-based pet poses, Dock presence, wandering behavior, and break reminders.",
   "main": "src/main/main.js",
   "author": "haoshuo",
@@ -15,8 +15,8 @@
     "dist:mac:local": "electron-builder --mac --publish never"
   },
   "build": {
-    "appId": "com.haoshuo.catcompanion",
-    "productName": "Cat Companion",
+    "appId": "com.haoshuo.purrtners",
+    "productName": "Purrtners",
     "asar": true,
     "files": [
       "src/**/*",

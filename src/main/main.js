@@ -167,7 +167,7 @@ function openSettings() {
   settingsWindow = new BrowserWindow({
     width: 520,
     height: 640,
-    title: 'Cat Companion',
+    title: 'Purrtners',
     resizable: false,
     minimizable: false,
     maximizable: false,
@@ -241,7 +241,7 @@ function buildTray() {
     : nativeImage.createEmpty();
   try {
     tray = new Tray(image.isEmpty() ? nativeImage.createEmpty() : image);
-    tray.setToolTip('Cat Companion');
+    tray.setToolTip('Purrtners');
     tray.setContextMenu(buildDockMenu());
   } catch (e) {
     // Tray creation can fail in headless envs; that's OK.
