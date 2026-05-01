@@ -13,6 +13,7 @@ async function init() {
   $('reminderEnabled').checked = !!settings.reminderEnabled;
   $('interval').value = settings.reminderIntervalMin;
   $('duration').value = settings.reminderDurationSec;
+  $('nickname').value = settings.userNickname || '';
   $('title').value = settings.reminderTitle;
   $('message').value = settings.reminderMessage;
   $('scale').value = settings.catScale;
@@ -76,8 +77,9 @@ async function save() {
     reminderEnabled: $('reminderEnabled').checked,
     reminderIntervalMin: Math.max(1, Number($('interval').value) || 45),
     reminderDurationSec: Math.max(5, Math.min(3600, Number($('duration').value) || 120)),
+    userNickname: $('nickname').value.trim(),
     reminderTitle: $('title').value.trim() || '该喝水啦',
-    reminderMessage: $('message').value.trim() || '起来活动一下,喝口水。',
+    reminderMessage: $('message').value.trim() || '{name}，起来活动一下，喝口水。',
     catScale: Math.max(0.6, Math.min(1.6, Number($('scale').value) || 1)),
   };
   settings = await window.catApi.updateSettings(patch);

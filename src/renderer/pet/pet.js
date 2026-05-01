@@ -10,6 +10,7 @@ let walkTimer = null;
 let walking = false;
 let walkVx = 0;
 let walkVy = 0;
+let actionTimeout = null;
 
 async function init() {
   cat = await window.catApi.getCat(catId);
@@ -45,6 +46,7 @@ function installDrag() {
     lastX = e.screenX;
     lastY = e.screenY;
     catEl.classList.add('dragging');
+    clearTimeout(actionTimeout);
     stopWalking();
   });
 
@@ -83,10 +85,13 @@ function scheduleNextAction(extraDelay = 0) {
   clearTimeout(walkTimer);
   const idle = 1500 + Math.random() * 4500 + extraDelay;
   walkTimer = setTimeout(() => {
+    const profile = cat.behaviorProfile || {};
+    const walkChance = Number.isFinite(profile.walkChance) ? profile.walkChance : 0.55;
+    const restChance = Number.isFinite(profile.restChance) ? profile.restChance : 0.2;
     const roll = Math.random();
-    if (roll < 0.55) startWalk();
-    else if (roll < 0.75) doSit();
-    else doNap();
+    if (roll < walkChance) startWalk();
+    else if (roll < walkChance + restChance) doNap();
+    else doBehaviorAction();
   }, idle);
 }
 
@@ -147,11 +152,86 @@ function doSit() {
 }
 
 function doNap() {
-  setPose('sleep');
-  setTimeout(() => {
+  clearTimeout(actionTimeout);
+  runSleepSequence();
+}
+
+function pickWeightedAction(actions) {
+  if (!Array.isArray(actions) || actions.length === 0) return null;
+  let total = 0;
+  for (const a of actions) total += Math.max(0, Number(a.weight) || 1);
+  if (!total) return null;
+  let roll = Math.random() * total;
+  for (const a of actions) {
+    roll -= Math.max(0, Number(a.weight) || 1);
+    if (roll <= 0) return a;
+  }
+  return actions[0];
+}
+
+function between(min, max, fallback) {
+  const lo = Number.isFinite(min) ? min : fallback;
+  const hi = Number.isFinite(max) ? max : lo;
+  if (hi <= lo) return lo;
+  return lo + Math.random() * (hi - lo);
+}
+
+function doBehaviorAction() {
+  const profile = cat.behaviorProfile || {};
+  const action = pickWeightedAction(profile.actions);
+  if (!action || !action.pose || !cat.poses[action.pose]) {
+    doSit();
+    return;
+  }
+  clearTimeout(actionTimeout);
+  if (action.pose === 'sleep') {
+    runSleepSequence();
+    return;
+  }
+  setPose(action.pose);
+  const firstMs = between(action.minMs, action.maxMs, 3200);
+  actionTimeout = setTimeout(() => {
+    if (action.thenPose && cat.poses[action.thenPose]) {
+      setPose(action.thenPose);
+      const secondMs = between(action.thenMinMs, action.thenMaxMs, 2500);
+      actionTimeout = setTimeout(() => {
+        setPose('idle');
+        scheduleNextAction();
+      }, secondMs);
+      return;
+    }
     setPose('idle');
     scheduleNextAction();
-  }, 6000 + Math.random() * 6000);
+  }, firstMs);
+}
+
+function runSleepSequence() {
+  const sequence = cat.behaviorProfile && cat.behaviorProfile.sleepSequence;
+  const poses =
+    sequence && Array.isArray(sequence.poses)
+      ? sequence.poses.filter((pose) => cat.poses[pose])
+      : ['sleep'].filter((pose) => cat.poses[pose]);
+  if (!poses.length) {
+    doSit();
+    return;
+  }
+
+  const totalMs = Math.max(1000, Number(sequence && sequence.totalMs) || 3 * 60 * 60 * 1000);
+  const intervalMs = Math.max(1000, Number(sequence && sequence.intervalMs) || 60 * 60 * 1000);
+  const startedAt = Date.now();
+
+  const showNext = (index) => {
+    const elapsed = Date.now() - startedAt;
+    if (elapsed >= totalMs) {
+      setPose('idle');
+      scheduleNextAction();
+      return;
+    }
+    setPose(poses[index % poses.length]);
+    actionTimeout = setTimeout(() => showNext(index + 1), Math.min(intervalMs, totalMs - elapsed));
+  };
+
+  showNext(0);
 }
 
 init();

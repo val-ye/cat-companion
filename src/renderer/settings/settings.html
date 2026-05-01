@@ -36,6 +36,11 @@
       </label>
 
       <label>
+        <span>用户昵称</span>
+        <input type="text" id="nickname" maxlength="24" placeholder="比如 Val" />
+      </label>
+
+      <label>
         <span>提醒标题</span>
         <input type="text" id="title" maxlength="40" />
       </label>
@@ -43,6 +48,7 @@
       <label>
         <span>提醒内容</span>
         <textarea id="message" rows="3" maxlength="200"></textarea>
+        <span class="hint-inline">支持 {name} 变量，例如：{name}，该喝水啦</span>
       </label>
 
       <button id="testReminder" class="ghost">现在试一次</button>

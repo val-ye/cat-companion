@@ -6,9 +6,11 @@ let countdownTimer = null;
 
 async function init() {
   const settings = await window.catApi.getSettings();
-  document.getElementById('title').textContent = settings.reminderTitle || '该喝水啦';
-  document.getElementById('message').textContent =
-    settings.reminderMessage || '起来活动一下,喝口水。';
+  const name = (settings.userNickname || '').trim() || '你';
+  const titleTpl = settings.reminderTitle || '该喝水啦';
+  const msgTpl = settings.reminderMessage || '{name}，起来活动一下，喝口水。';
+  document.getElementById('title').textContent = renderTemplate(titleTpl, name);
+  document.getElementById('message').textContent = renderTemplate(msgTpl, name);
 
   const catsContainer = document.getElementById('cats');
   const ids = settings.activeCatIds && settings.activeCatIds.length
@@ -31,6 +33,10 @@ async function init() {
   });
 
   startCountdown(Math.max(5, Number(settings.reminderDurationSec) || 120));
+}
+
+function renderTemplate(template, name) {
+  return String(template || '').replaceAll('{name}', name);
 }
 
 function startCountdown(totalSec) {

@@ -39,11 +39,14 @@ function spawnPet(catId) {
   const scale = settings.catScale || 1;
   const w = Math.round(cat.defaultSize.width * scale);
   const h = Math.round(cat.defaultSize.height * scale);
+  const spawnIndex = petWindows.size;
+  const spread = Math.min(workArea.width - w, 160 + spawnIndex * 140);
+  const safeX = Math.max(0, Math.min(workArea.width - w, spread));
 
   const win = new BrowserWindow({
     width: w,
     height: h,
-    x: workArea.x + Math.round(Math.random() * (workArea.width - w)),
+    x: workArea.x + Math.round(Math.random() * safeX),
     y: workArea.y + workArea.height - h - 80,
     transparent: true,
     frame: false,
@@ -261,6 +264,7 @@ ipcMain.handle('cat:get', (_evt, id) => {
     weightKg: c.weightKg,
     defaultSize: c.defaultSize,
     poses: c.poses,
+    behaviorProfile: c.behaviorProfile || null,
   };
 });
 
